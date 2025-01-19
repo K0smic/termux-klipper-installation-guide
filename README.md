@@ -1,7 +1,6 @@
 # Install Klipper, Mooneaker and Mainsail on Android Termux only
 
-Original playlist:
-
+Original author: [과슈의 3D Printer](https://www.youtube.com/@gouache-3d-astro/) | The playlist was deleted.
 ## Requirements
 
 1. Android phone with root permission
