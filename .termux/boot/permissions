@@ -1,0 +1,9 @@
+#!/data/data/com.termux/files/usr/bin/sh
+
+### OLD Script used on a Xiaomi phone
+
+# termux-wake-lock
+
+# sudo -u root /system/bin/sh -c "setenforce 0"
+# sudo -u root /system/bin/sh -c "chmod -R 0777 /dev/bus/usb/"
+# sudo -u root /system/bin/sh -c "chmod -R 0777 /data/data/com.octo4a/"

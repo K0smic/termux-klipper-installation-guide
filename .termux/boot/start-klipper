@@ -1,0 +1,9 @@
+#!/data/data/com.termux/files/usr/bin/sh
+exec > start-klipper.log 2>&1
+set -x
+termux-wake-lock
+sshd
+
+cd
+sudo ./start-debian-services.sh
+

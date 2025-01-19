@@ -1,0 +1,27 @@
+#!/data/data/com.termux/files/usr/bin/sh
+exec > usb-scanner.log 2>&1
+set -x
+termux-wake-lock
+
+# Path to serialpipe and printer configuration file
+SERIALPIPE_PATH="/data/data/com.octo4a/files/serialpipe"
+PRINTER_CFG="debian-fs/root/printer_data/config/printer.cfg"
+
+# Get serialpipe content
+printer_serial=$(sudo -u root /system/bin/sh -c "ls -l $SERIALPIPE_PATH" | awk '{print $NF}')
+
+# Infinite loop to monitor changes in serialpipe
+while true; do
+    # Get serialpipe content again
+    config_serial=$(sudo -u root /system/bin/sh -c "cat $PRINTER_CFG" | grep '/dev/pts/' | awk '{print $NF}')
+
+    # If changed, edit printer.cfg with sed
+    if [ "$printer_serial" != "$config_serial" ]; then
+        echo "Serial number changed from $config_serial to $printer_serial. Updating printer.cfg..."
+        sudo sed -i "s|/dev/pts/[0-9]*|$printer_serial|g" "$PRINTER_CFG"
+        # config_serial=$printer_serial
+    fi
+
+    # Wait to check again
+    sleep 60
+done
